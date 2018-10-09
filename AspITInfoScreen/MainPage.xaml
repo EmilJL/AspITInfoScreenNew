@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <TextBox x:Name="TBoxTest" HorizontalAlignment="Left" Margin="528,168,0,0" Text="TestBox" VerticalAlignment="Top" TextChanged="TextBox_TextChanged"/>
     </Grid>
 </Page>

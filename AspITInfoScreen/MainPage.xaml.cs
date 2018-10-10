@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,11 +26,23 @@ namespace AspITInfoScreen
         public MainPage()
         {
             this.InitializeComponent();
+            SetWeatherImage();
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SetWeatherImage()
         {
-
+            try
+            {
+                Uri address = new Uri("http://servlet.dmi.dk/byvejr/servlet/byvejr_dag1?by=2630&mode=long");
+                WebWeather.Source = address;
+            }
+            catch (Exception error)
+            {
+                Debug.WriteLine(error.Message);
+            }
+            
         }
     }
 }

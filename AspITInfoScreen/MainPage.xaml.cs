@@ -36,7 +36,7 @@ namespace AspITInfoScreen
             TBlockDate.Text = Date.ToString("dd/MM/yyyy");
         }
         /// <summary>
-        /// Opens a weather chart from DMI in a WebView.
+        /// Retrieves a BitmapImage of the weather chart from DMI.
         /// </summary>
         public void SetWeatherImage()
         {
@@ -58,7 +58,9 @@ namespace AspITInfoScreen
             }
             
         }
-
+        /// <summary>
+        /// Retrieves todays Garfield comic strip from Cloudfront.net.
+        /// </summary>
         public void SetComicStripImage()
         {
             try
@@ -84,6 +86,9 @@ namespace AspITInfoScreen
         {
             weather.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
             weather.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
+
+            comic.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
+            comic.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
         }
     }
 }

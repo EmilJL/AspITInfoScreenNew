@@ -21,5 +21,6 @@
         </Grid.RowDefinitions>
         <Image x:Name="ImageWeather" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="350" Margin="0, 0,-630,-360" Grid.RowSpan="3" VerticalAlignment="Top" Width="630"/>
         <TextBlock x:Name="TBlockDate" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="1559,85,-1621,-105" Grid.RowSpan="3" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Image x:Name="ImageComic" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="333" Margin="10,10,-623,-343" Grid.RowSpan="3" VerticalAlignment="Top" Width="613"/>
     </Grid>
 </Page>

@@ -25,12 +25,15 @@ namespace AspITInfoScreen
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        BitmapImage bmap = new BitmapImage();
+        BitmapImage weather = new BitmapImage();
+        BitmapImage comic = new BitmapImage();
+        DateTime Date = DateTime.Now;
         public MainPage()
         {
             this.InitializeComponent();
             SetWeatherImage();
-            TBlockDate.Text = DateTime.Today.ToString("dd/MM/yyyy");
+            SetComicStripImage();            
+            TBlockDate.Text = Date.ToString("dd/MM/yyyy");
         }
         /// <summary>
         /// Opens a weather chart from DMI in a WebView.
@@ -41,16 +44,16 @@ namespace AspITInfoScreen
             {
                 Uri address = new Uri("http://servlet.dmi.dk/byvejr/servlet/byvejr_dag1?by=2630&mode=long");
 
-                bmap.DecodePixelType = DecodePixelType.Logical;
-                bmap.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
-                bmap.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
-                bmap.UriSource = address;
+                weather.DecodePixelType = DecodePixelType.Logical;
+                weather.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
+                weather.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
+                weather.UriSource = address;
 
-                ImageWeather.Source = bmap;
+                ImageWeather.Source = weather;
 
             }
             catch (Exception error)
-            {
+            {   
                 Debug.WriteLine(error.GetType() + ": " + error.Message);
             }
             
@@ -58,13 +61,29 @@ namespace AspITInfoScreen
 
         public void SetComicStripImage()
         {
+            try
+            {
+                string url = "https://" + "d1ejxu6vysztl5.cloudfront.net/comics/garfield/" + Date.ToString("yyyy") + "/" + Date.ToString("yyyy-MM-dd") + ".gif";
+                Uri address = new Uri(url);
 
+                comic.DecodePixelType = DecodePixelType.Logical;
+                comic.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
+                comic.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
+                comic.UriSource = address;
+
+                ImageComic.Source = comic;
+
+            }
+            catch (Exception error)
+            {
+                Debug.WriteLine(error.GetType() + ": " + error.Message);
+            }
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            bmap.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
-            bmap.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
+            weather.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
+            weather.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
         }
     }
 }

@@ -25,23 +25,22 @@ namespace AspITInfoScreen
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        BitmapImage weather = new BitmapImage();
-        BitmapImage comic = new BitmapImage();
         DateTime Date = DateTime.Now;
         public MainPage()
         {
             this.InitializeComponent();
             SetWeatherImage();
-            SetComicStripImage();            
+            SetComicStripImage(ImageComic);            
             TBlockDate.Text = Date.ToString("dd/MM/yyyy");
         }
         /// <summary>
         /// Retrieves a BitmapImage of the weather chart from DMI.
         /// </summary>
-        public void SetWeatherImage()
+        private void SetWeatherImage()
         {
             try
             {
+                BitmapImage weather = new BitmapImage();
                 Uri address = new Uri("http://servlet.dmi.dk/byvejr/servlet/byvejr_dag1?by=2630&mode=long");
 
                 weather.DecodePixelType = DecodePixelType.Logical;
@@ -59,21 +58,22 @@ namespace AspITInfoScreen
             
         }
         /// <summary>
-        /// Retrieves todays Garfield comic strip from Cloudfront.net.
+        /// Retrieves Garfield comic strips from Cloudfront.net.
         /// </summary>
-        public void SetComicStripImage()
+        private void SetComicStripImage(Image container, int deductDays = 0)
         {
             try
             {
-                string url = "https://" + "d1ejxu6vysztl5.cloudfront.net/comics/garfield/" + Date.ToString("yyyy") + "/" + Date.ToString("yyyy-MM-dd") + ".gif";
+                BitmapImage comic = new BitmapImage();
+                string url = "https://" + "d1ejxu6vysztl5.cloudfront.net/comics/garfield/" + Date.ToString("yyyy") + "/" + Date.AddDays(-deductDays).ToString("yyyy-MM-dd") + ".gif";
                 Uri address = new Uri(url);
 
                 comic.DecodePixelType = DecodePixelType.Logical;
                 comic.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
-                comic.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
+                comic.DecodePixelHeight = (int)Math.Round(MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault() / 2);
                 comic.UriSource = address;
 
-                ImageComic.Source = comic;
+                container.Source = comic;
 
             }
             catch (Exception error)
@@ -84,11 +84,9 @@ namespace AspITInfoScreen
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            weather.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
-            weather.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
-
-            comic.DecodePixelWidth = (int)MyGrid.ColumnDefinitions.Select(c => c.ActualWidth).FirstOrDefault();
-            comic.DecodePixelHeight = (int)MyGrid.RowDefinitions.Select(c => c.ActualHeight).FirstOrDefault();
+            SetWeatherImage();
+            SetComicStripImage(ImageComic);
+            SetComicStripImage(ImageComic2, 1);
         }
     }
 }

@@ -32,6 +32,7 @@ namespace AspITInfoScreen
             SetWeatherImage();
             SetComicStripImage(ImageComic);            
             TBlockDate.Text = Date.ToString("dd/MM/yyyy");
+            GetMaxAdminMessage();
         }
         /// <summary>
         /// Retrieves a BitmapImage of the weather chart from DMI.
@@ -80,6 +81,18 @@ namespace AspITInfoScreen
             {
                 Debug.WriteLine(error.GetType() + ": " + error.Message);
             }
+        }
+
+        /// <summary>
+        /// Retrives the custom admin message from the database and sets the relevant AdminMessage element in the GUI.
+        /// </summary>
+        private void GetMaxAdminMessage()
+        {
+            string msg = new string('W', 660);
+            string title = new string('W', 44);
+            TBlockAdminMessageTitle.VerticalAlignment = VerticalAlignment.Top;
+            TBlockAdminMessageTitle.Text = title;
+            TBlockAdminMessage.Text = msg;
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)

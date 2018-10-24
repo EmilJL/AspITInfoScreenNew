@@ -36,10 +36,23 @@ namespace AspITInfoScreen.DAL
             messages = new ObservableCollection<Message>();
             lunchPlans = new ObservableCollection<LunchPlan>();
             model = new Model(admins, lunchPlans, messages);
-            AddMessages();
+            //AddMes();
         }
-        static void AddMessages()
+        static void AddMes()
         {
+            DbAccess da = new DbAccess();
+            Random r = new Random();
+
+            byte[] bytes = new byte[10];
+            r.NextBytes(bytes);
+            Admin admin = new Admin
+            {
+                Username = "Daniel",
+                PasswordHash = bytes,
+                PasswordSalt = bytes
+            };
+            admins.Add(admin);
+            da.AddAdmin(admin);
             Message message = new Message
             {
                 AdminId = 1,
@@ -48,6 +61,8 @@ namespace AspITInfoScreen.DAL
                 Text = "En masse fucking lortetekst."
             };
             messages.Add(message);
+            
+            da.AddMessage(message);
         }
     }
 }

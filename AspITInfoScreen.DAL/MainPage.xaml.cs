@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +23,31 @@ namespace AspITInfoScreen.DAL
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        static ObservableCollection<Admin> admins;
+        static ObservableCollection<Message> messages;
+        static ObservableCollection<LunchPlan> lunchPlans;
+        static Model model;
+
+        
         public MainPage()
         {
             this.InitializeComponent();
+            admins = new ObservableCollection<Admin>();
+            messages = new ObservableCollection<Message>();
+            lunchPlans = new ObservableCollection<LunchPlan>();
+            model = new Model(admins, lunchPlans, messages);
+            AddMessages();
+        }
+        static void AddMessages()
+        {
+            Message message = new Message
+            {
+                AdminId = 1,
+                Date = DateTime.Now,
+                Header = "En overskrift",
+                Text = "En masse fucking lortetekst."
+            };
+            messages.Add(message);
         }
     }
 }

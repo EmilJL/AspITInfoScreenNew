@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Diagnostics;
 using System.Net;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Documents;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -84,7 +85,7 @@ namespace AspITInfoScreen
         }
 
         /// <summary>
-        /// Retrives the custom admin message from the database and sets the relevant AdminMessage element in the GUI.
+        /// Sets the AdminMessage elements to the maximum amount of characters allowed.
         /// </summary>
         private void GetMaxAdminMessage()
         {
@@ -93,6 +94,12 @@ namespace AspITInfoScreen
             TBlockAdminMessageTitle.VerticalAlignment = VerticalAlignment.Top;
             TBlockAdminMessageTitle.Text = title;
             TBlockAdminMessage.Text = msg;
+        }
+        /// <summary>
+        /// Retrives the custom admin message from the database and sets the relevant AdminMessage element in the GUI.
+        /// </summary>
+        private void SetAdminMessage()
+        {
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)

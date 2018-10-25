@@ -8,26 +8,24 @@ using AspITInfoScreen.DAL;
 
 namespace AspITInfoScreen.Business
 {
-    public class AdminHandler
+    public class AdminHandler : DBHandler
     {
-        private DbAccess dbAccess;
-        private Model model;
-        public AdminHandler()
-        {
-            dbAccess = new DbAccess();
-            model = dbAccess.GetDataAndCreateModel();
-        }
+        
+        //public AdminHandler()
+        //{
+        //    model = dbAccess.GetDataAndCreateModel();
+        //}
         public Admin GetAdmin(int id)
         {
-            Admin admin = model.Admins.Where(m => m.Id == id).FirstOrDefault();
+            Admin admin = Model.Admins.Where(m => m.Id == id).FirstOrDefault();
             return admin;
         }
         public bool AddAdmin(Admin admin)
         {
             try
             {
-                dbAccess.AddAdmin(admin);
-                model.Admins.Add(admin);
+                DbAccess.AddAdmin(admin);
+                Model.Admins.Add(admin);
                 return true;
             }
             catch (Exception e)
@@ -40,8 +38,8 @@ namespace AspITInfoScreen.Business
         {
             try
             {
-                dbAccess.DeleteAdmin(id);
-                model.Admins.RemoveAt(model.Admins.IndexOf(model.Admins.Where(m => m.Id == id).FirstOrDefault()));
+                DbAccess.DeleteAdmin(id);
+                Model.Admins.RemoveAt(Model.Admins.IndexOf(Model.Admins.Where(m => m.Id == id).FirstOrDefault()));
                 return true;
             }
             catch (Exception e)

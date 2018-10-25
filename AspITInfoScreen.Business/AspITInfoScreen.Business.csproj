@@ -106,7 +106,10 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AdminHandler.cs" />
+    <Compile Include="DBHandler.cs" />
+    <Compile Include="LunchPlanHandler.cs" />
+    <Compile Include="MessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\AspITInfoScreen.Business.rd.xml" />
   </ItemGroup>
@@ -114,6 +117,12 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.9</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AspITInfoScreen.DAL\AspITInfoScreen.DAL.csproj">
+      <Project>{fb736b35-53c0-4ef8-93e9-8053af042a06}</Project>
+      <Name>AspITInfoScreen.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

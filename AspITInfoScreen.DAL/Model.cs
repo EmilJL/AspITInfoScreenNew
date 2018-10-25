@@ -11,9 +11,16 @@ namespace AspITInfoScreen.DAL
     public class Model /*: INotifyCollectionChanged*/
     {
         DbAccess dbAccess;
+        public Model()
+        {
+            Model model = dbAccess.GetDataAndCreateModel();
+            Admins = model.Admins;
+            LunchPlans = model.LunchPlans;
+            Messages = model.Messages;
+        }
         public Model(ObservableCollection<Admin> admins, ObservableCollection<LunchPlan> lunchPlans, ObservableCollection<Message> messages)
         {
-            dbAccess = new DbAccess();
+            //dbAccess = new DbAccess();
             Admins = admins;
             LunchPlans = lunchPlans;
             Messages = messages;

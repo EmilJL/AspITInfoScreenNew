@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AspITInfoScreen.Business
 {
-    public class Class1
+    class DBHandler
     {
     }
 }

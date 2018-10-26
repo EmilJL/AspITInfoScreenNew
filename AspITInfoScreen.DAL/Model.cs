@@ -10,7 +10,7 @@ namespace AspITInfoScreen.DAL
 {
     public class Model /*: INotifyCollectionChanged*/
     {
-        DbAccess dbAccess;
+        DbAccess dbAccess = new DbAccess();
         public Model()
         {
             dbAccess = new DbAccess();

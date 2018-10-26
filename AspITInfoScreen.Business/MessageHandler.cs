@@ -15,6 +15,14 @@ namespace AspITInfoScreen.Business
             Message message = Model.Messages.Where(m => m.Id == id).FirstOrDefault();
             return message;
         }
+        /// <summary>
+        /// Gets the newest message based on logged date in the DB.
+        /// </summary>
+        /// <returns></returns>
+        public Message GetNewestMessage()
+        {
+            return Model.Messages.OrderByDescending(m => m.Date).FirstOrDefault();
+        }
         public bool AddMessage(Message message)
         {
             try

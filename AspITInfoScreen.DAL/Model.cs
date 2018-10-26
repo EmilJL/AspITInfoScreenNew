@@ -13,6 +13,7 @@ namespace AspITInfoScreen.DAL
         DbAccess dbAccess;
         public Model()
         {
+            dbAccess = new DbAccess();
             Model model = dbAccess.GetDataAndCreateModel();
             Admins = model.Admins;
             LunchPlans = model.LunchPlans;

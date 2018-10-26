@@ -16,6 +16,8 @@ using System.Diagnostics;
 using System.Net;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Documents;
+using AspITInfoScreen.Business;
+using AspITInfoScreen.DAL;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 

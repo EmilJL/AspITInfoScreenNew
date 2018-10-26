@@ -10,8 +10,13 @@ namespace AspITInfoScreen.Business
     public class DBHandler
     {
         private DbAccess dbAccess;
-        private Model model = new Model();
-        
+        private Model model;
+        public DBHandler()
+        {
+            dbAccess = new DbAccess();
+            model = new Model();
+        }
+
         public Model Model
         {
             get { return model;}

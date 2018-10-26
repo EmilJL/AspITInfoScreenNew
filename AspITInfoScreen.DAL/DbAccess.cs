@@ -14,7 +14,7 @@ namespace AspITInfoScreen.DAL
         //public ObservableCollection<Admin> Admins { get; private set; }
         //public ObservableCollection<LunchPlan> LunchPlans { get; private set; }
         //public ObservableCollection<Message> Messages { get; private set; }
-        private const string connectionString = @"Data Source=cvdb3,1488;Initial Catalog = DAHO.AspITInfoScreen; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private const string connectionString = @"Data Source=cvdb3,1488;Initial Catalog=DAHO.AspITInfoScreen;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         public Model GetDataAndCreateModel()
         {

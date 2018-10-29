@@ -18,6 +18,9 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Documents;
 using AspITInfoScreen.Business;
 using AspITInfoScreen.DAL;
+using Windows.Data.Pdf;
+using System.Net.Http;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,6 +32,11 @@ namespace AspITInfoScreen
     public sealed partial class MainPage : Page
     {
         DateTime Date = DateTime.Now;
+        public ObservableCollection<BitmapImage> PdfPages
+        {
+            get;
+            set;
+        } = new ObservableCollection<BitmapImage>();
         public MainPage()
         {
             this.InitializeComponent();
@@ -36,6 +44,7 @@ namespace AspITInfoScreen
             SetComicStripImage(ImageComic);            
             TBlockDate.Text = Date.ToString("dd/MM/yyyy");
             SetAdminMessage();
+            OpenRemoteModule();
         }
         /// <summary>
         /// Retrieves a BitmapImage of the weather chart from DMI.
@@ -96,6 +105,39 @@ namespace AspITInfoScreen
             TBlockAdminMessageTitle.VerticalAlignment = VerticalAlignment.Top;
             TBlockAdminMessageTitle.Text = title;
             TBlockAdminMessage.Text = msg;
+        }
+
+        private async void OpenRemoteModule()
+        {
+            HttpClient client = new HttpClient();
+            Uri url = new Uri("http://www.aspit.dk/fileadmin/filbibliotek/KALENDER/2018-Fremad/Efteraar-18-v2.pdf");
+            var stream = await client.GetStreamAsync(url);
+            var memStream = new MemoryStream();
+            await stream.CopyToAsync(memStream);
+            memStream.Position = 0;
+            PdfDocument doc = await PdfDocument.LoadFromStreamAsync(memStream.AsRandomAccessStream);
+
+            Load(doc);
+        }
+
+        private async void Load(PdfDocument pdfDoc)
+        {
+            PdfPages.Clear();
+
+            for (uint i = 0; i < pdfDoc.PageCount; i++)
+            {
+                BitmapImage image = new BitmapImage();
+
+                var page = pdfDoc.GetPage(i);
+
+                using (Windows.Storage.Streams.InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+                {
+                    await page.RenderToStreamAsync(stream);
+                    await image.SetSourceAsync(stream);
+                }
+
+                PdfPages.Add(image);
+            }
         }
         /// <summary>
         /// Retrives the custom admin message from the database and sets the relevant AdminMessage element in the GUI.

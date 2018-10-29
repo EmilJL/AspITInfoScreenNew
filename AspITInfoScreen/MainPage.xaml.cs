@@ -115,29 +115,18 @@ namespace AspITInfoScreen
             var memStream = new MemoryStream();
             await stream.CopyToAsync(memStream);
             memStream.Position = 0;
-            PdfDocument doc = await PdfDocument.LoadFromStreamAsync(memStream.AsRandomAccessStream);
+            PdfDocument doc = await PdfDocument.LoadFromStreamAsync(memStream.AsRandomAccessStream());
 
-            Load(doc);
-        }
+            BitmapImage bitmap = new BitmapImage();
+            var page = doc.GetPage(0);
 
-        private async void Load(PdfDocument pdfDoc)
-        {
-            PdfPages.Clear();
-
-            for (uint i = 0; i < pdfDoc.PageCount; i++)
+            using (Windows.Storage.Streams.InMemoryRandomAccessStream mStream = new Windows.Storage.Streams.InMemoryRandomAccessStream())
             {
-                BitmapImage image = new BitmapImage();
-
-                var page = pdfDoc.GetPage(i);
-
-                using (Windows.Storage.Streams.InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
-                {
-                    await page.RenderToStreamAsync(stream);
-                    await image.SetSourceAsync(stream);
-                }
-
-                PdfPages.Add(image);
+                await page.RenderToStreamAsync(mStream);
+                await bitmap.SetSourceAsync(mStream);
             }
+
+            ImageModulePlan.Source = bitmap;
         }
         /// <summary>
         /// Retrives the custom admin message from the database and sets the relevant AdminMessage element in the GUI.

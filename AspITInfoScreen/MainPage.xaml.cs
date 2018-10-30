@@ -106,7 +106,9 @@ namespace AspITInfoScreen
             TBlockAdminMessageTitle.Text = title;
             TBlockAdminMessage.Text = msg;
         }
-
+        /// <summary>
+        /// Retrieves the module schedule from AspIT.dk and converts it into a bitmap to display in the GUI.
+        /// </summary>
         private async void OpenRemoteModule()
         {
             HttpClient client = new HttpClient();

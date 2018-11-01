@@ -40,12 +40,44 @@ namespace AspITInfoScreen
         public MainPage()
         {
             this.InitializeComponent();
-            SetWeatherImage();
-            SetComicStripImage(ImageComic);            
-            TBlockDate.Text = Date.ToString("dd/MM/yyyy");
-            SetAdminMessage();
-            OpenRemoteModule();
+            UpdateUiContent();
+            //SetTimer();
         }
+
+        private void SetDpTimer()
+        {
+            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0,5,0) };
+            timer.Tick += new EventHandler(Dispatcher_Elapsed);
+        }
+
+        private void SetTimer()
+        {
+            System.Timers.Timer timer = new System.Timers.Timer(3000);
+            timer.AutoReset = true;
+            timer.Enabled = true;
+            timer.Elapsed += Timer_Elapsed;
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            UpdateUiContent();
+        }
+
+        private void Dispatcher_Elapsed(object sender, EventArgs e)
+        {
+            UpdateUiContent();
+        }
+
+        private void UpdateUiContent()
+        {
+            TBlockAdminMessage.Text += "[Tick] ";
+            //SetWeatherImage();
+            //SetComicStripImage(ImageComic);
+            //TBlockDate.Text = Date.ToString("dd/MM/yyyy");
+            //SetAdminMessage();
+            //OpenRemoteModule();
+        }
+
         /// <summary>
         /// Retrieves a BitmapImage of the weather chart from DMI.
         /// </summary>
@@ -144,9 +176,7 @@ namespace AspITInfoScreen
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            SetWeatherImage();
-            SetComicStripImage(ImageComic);
-            SetComicStripImage(ImageComic2, 1);
+            UpdateUiContent();
         }
     }
 }

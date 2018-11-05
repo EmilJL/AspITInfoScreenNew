@@ -31,6 +31,7 @@ namespace AspITInfoScreen
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        int counter;
         DateTime Date = DateTime.Now;
         public ObservableCollection<BitmapImage> PdfPages
         {
@@ -40,22 +41,15 @@ namespace AspITInfoScreen
         public MainPage()
         {
             this.InitializeComponent();
-            UpdateUiContent();
-            //SetTimer();
+            counter = 1;
+            SetDpTimer();
         }
 
         private void SetDpTimer()
         {
-            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0,5,0) };
-            timer.Tick += new EventHandler(Dispatcher_Elapsed);
-        }
-
-        private void SetTimer()
-        {
-            System.Timers.Timer timer = new System.Timers.Timer(3000);
-            timer.AutoReset = true;
-            timer.Enabled = true;
-            timer.Elapsed += Timer_Elapsed;
+            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0,0,10) };
+            timer.Tick += Dispatcher_Elapsed;
+            timer.Start();
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -63,14 +57,26 @@ namespace AspITInfoScreen
             UpdateUiContent();
         }
 
-        private void Dispatcher_Elapsed(object sender, EventArgs e)
+        private void Dispatcher_Elapsed(object sender, object e)
         {
+            if (counter == 1)
+            {
+                counter++;
+            }
             UpdateUiContent();
+            counter++;
         }
 
         private void UpdateUiContent()
         {
-            TBlockAdminMessage.Text += "[Tick] ";
+            if (counter % 2 != 0)
+            {
+                TBlockAdminMessage.Text += "[Tick] ";
+            }
+            else
+            {
+                TBlockAdminMessage.Text += "[Tock] ";
+            }
             //SetWeatherImage();
             //SetComicStripImage(ImageComic);
             //TBlockDate.Text = Date.ToString("dd/MM/yyyy");

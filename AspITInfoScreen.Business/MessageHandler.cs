@@ -23,33 +23,5 @@ namespace AspITInfoScreen.Business
         {
             return Model.Messages.OrderByDescending(m => m.Date).FirstOrDefault();
         }
-        public bool AddMessage(Message message)
-        {
-            try
-            {
-                DbAccess.AddMessage(message);
-                Model.Messages.Add(message);
-                return true;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-                return false;
-            }
-        }
-        public bool DeleteMessage(int id)
-        {
-            try
-            {
-                DbAccess.DeleteMessage(id);
-                Model.Messages.RemoveAt(Model.Messages.IndexOf(Model.Messages.Where(m => m.Id == id).FirstOrDefault()));
-                return true;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-                return false;
-            }
-        }
     }
 }

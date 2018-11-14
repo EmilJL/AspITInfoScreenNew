@@ -183,8 +183,7 @@ namespace AspITInfoScreen
         /// </summary>
         private void SetAdminMessage()
         {
-            MessageHandler messageHandler = new MessageHandler();
-            Message msg = messageHandler.GetNewestMessage();
+            Message msg = messageHandler.GetNewestMessage(model);
 
             TBlockAdminMessageTitle.Text = msg.Header;
             TBlockAdminMessage.Text = msg.Text;

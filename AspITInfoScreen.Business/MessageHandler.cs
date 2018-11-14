@@ -15,9 +15,9 @@ namespace AspITInfoScreen.Business
             Message message = Model.Messages.Where(m => m.Id == id).FirstOrDefault();
             return message;
         }
-        public Message GetNewestMessage()
+        public Message GetNewestMessage(Model model)
         {
-            return Model.Messages.OrderByDescending(m => m.Date).FirstOrDefault();
+            return model.Messages.OrderByDescending(m => m.Date).FirstOrDefault();
         }
     }
 }

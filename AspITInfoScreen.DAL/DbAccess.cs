@@ -78,7 +78,8 @@ namespace AspITInfoScreen.DAL
                                 {
                                     var meal = new Meal();
                                     meal.Id = reader.GetInt32(0);
-                                    meal.TimesChosen = reader.GetInt32(1);
+                                    meal.Description = reader.GetString(1);
+                                    meal.TimesChosen = reader.GetInt32(2);
                                     meals.Add(meal);
                                 }
                             }

@@ -17,6 +17,10 @@ namespace AspITInfoScreen.DAL
         {
             dbAccess = new DbAccess();
             Model model = dbAccess.GetDataAndCreateModel();
+            Meals = model.Meals;
+            LunchPlans = model.LunchPlans;
+            Messages = model.Messages;
+            MealsVsLunchPlans = model.MealsVsLunchPlans;
         }
         public Model(ObservableCollection<LunchPlan> lunchPlans, ObservableCollection<Message> messages, ObservableCollection<Meal> meals, ObservableCollection<MealsVsLunchPlans> mealsVsLunchPlans)
         {

@@ -15,5 +15,11 @@ namespace AspITInfoScreen.Business
             LunchPlan lunchPlan = Model.LunchPlans.Where(m => m.Id == id).FirstOrDefault();
             return lunchPlan;
         }
+        public LunchPlan GetLunchPlanForWeek(int week)
+        {
+            LunchPlan lunchPlan = Model.LunchPlans.Where(l => l.Week == week).FirstOrDefault();
+            return lunchPlan;
+        }
+
     }
 }

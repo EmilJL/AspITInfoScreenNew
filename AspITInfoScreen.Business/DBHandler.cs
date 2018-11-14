@@ -14,7 +14,7 @@ namespace AspITInfoScreen.Business
         public DBHandler()
         {
             dbAccess = new DbAccess();
-            model = dbAccess.GetDataAndCreateModel();
+            model = new Model();
         }
 
         public Model Model

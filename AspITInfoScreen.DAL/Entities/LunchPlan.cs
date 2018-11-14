@@ -7,38 +7,22 @@ using System.Threading.Tasks;
 
 namespace AspITInfoScreen.DAL
 {
-    public class LunchPlan : INotifyPropertyChanged
+    public class LunchPlan
     {
         public int Id { get; set; }
-        private DateTime date;
-        private string meal;
+        private int week;
+        public LunchPlan()
+        {
 
-        public string Meal
-        {
-            get { return meal; }
-            set
-            {
-                meal = value;
-                NotifyPropertyChanged("Meal");
-            }
         }
-        public DateTime Date
+        public LunchPlan(int week)
         {
-            get { return date; }
-            set
-            {
-                date = value;
-                NotifyPropertyChanged("Date");
-            }
+            Week = week;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
+        public int Week
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            get { return week; }
+            set { week = value; }
         }
     }
 }

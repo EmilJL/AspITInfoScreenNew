@@ -106,9 +106,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AdminHandler.cs" />
     <Compile Include="DBHandler.cs" />
     <Compile Include="LunchPlanHandler.cs" />
+    <Compile Include="MealHandler.cs" />
     <Compile Include="MessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\AspITInfoScreen.Business.rd.xml" />

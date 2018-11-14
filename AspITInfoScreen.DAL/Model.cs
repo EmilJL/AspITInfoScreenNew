@@ -5,19 +5,30 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AspITInfoScreen.DAL.Entities;
+
 
 namespace AspITInfoScreen.DAL
 {
     public class Model
     {
-        public Model(ObservableCollection<Admin> admins, ObservableCollection<LunchPlan> lunchPlans, ObservableCollection<Message> messages)
+        DbAccess dbAccess = new DbAccess();
+        public Model()
         {
-            Admins = admins;
+            dbAccess = new DbAccess();
+            Model model = dbAccess.GetDataAndCreateModel();
+        }
+        public Model(ObservableCollection<LunchPlan> lunchPlans, ObservableCollection<Message> messages, ObservableCollection<Meal> meals, ObservableCollection<MealsVsLunchPlans> mealsVsLunchPlans)
+        {
             LunchPlans = lunchPlans;
             Messages = messages;
+            Meals = meals;
+            MealsVsLunchPlans = mealsVsLunchPlans;
         }
-        public ObservableCollection<Admin> Admins { get; private set; }
-        public ObservableCollection<LunchPlan> LunchPlans { get; private set; }
-        public ObservableCollection<Message> Messages { get; private set; }
+        // PRIVATE SETTERS?
+        public ObservableCollection<Meal> Meals { get; set; }
+        public ObservableCollection<LunchPlan> LunchPlans { get; set; }
+        public ObservableCollection<Message> Messages { get; set; }
+        public ObservableCollection<MealsVsLunchPlans> MealsVsLunchPlans { get; set; }
     }
 }

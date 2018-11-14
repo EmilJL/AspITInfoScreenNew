@@ -31,6 +31,11 @@ namespace AspITInfoScreen
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private DBHandler dbHandler;
+        private LunchPlanHandler lunchPlanHandler;
+        private Model model;
+        private MealHandler mealHandler;
+        private MessageHandler messageHandler;
         int counter;
         DateTime Date = DateTime.Now;
         public ObservableCollection<BitmapImage> PdfPages
@@ -41,6 +46,11 @@ namespace AspITInfoScreen
         public MainPage()
         {
             this.InitializeComponent();
+            lunchPlanHandler = new LunchPlanHandler();
+            mealHandler = new MealHandler();
+            dbHandler = new DBHandler();
+            messageHandler = new MessageHandler();
+            model = dbHandler.Model;
             counter = 1;
             SetDpTimer();
         }

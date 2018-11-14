@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AspITInfoScreen.DAL
 {
-    public class Message : INotifyPropertyChanged
+    public class Message
     {
         public int Id {get; set;}
         public int AdminId { get; set; }
@@ -21,7 +21,6 @@ namespace AspITInfoScreen.DAL
             set
             {
                 date = value;
-                NotifyPropertyChanged("Date");
             }
         }
         public string Text
@@ -30,7 +29,6 @@ namespace AspITInfoScreen.DAL
             set
             {
                 text = value;
-                NotifyPropertyChanged("Text");
             }
         }
         public string Header
@@ -39,16 +37,7 @@ namespace AspITInfoScreen.DAL
             set
             {
                 header = value;
-                NotifyPropertyChanged("Header");
-            }
-        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

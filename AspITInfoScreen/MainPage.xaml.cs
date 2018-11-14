@@ -57,7 +57,7 @@ namespace AspITInfoScreen
 
         private void SetDpTimer()
         {
-            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0,5,0) };
+            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0,2,0) };
             timer.Tick += Dispatcher_Elapsed;
             timer.Start();
         }

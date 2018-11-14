@@ -47,7 +47,7 @@ namespace AspITInfoScreen
 
         private void SetDpTimer()
         {
-            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0,0,10) };
+            DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0,5,0) };
             timer.Tick += Dispatcher_Elapsed;
             timer.Start();
         }
@@ -77,11 +77,11 @@ namespace AspITInfoScreen
             {
                 TBlockAdminMessage.Text += "[Tock] ";
             }
-            //SetWeatherImage();
-            //SetComicStripImage(ImageComic);
-            //TBlockDate.Text = Date.ToString("dd/MM/yyyy");
-            //SetAdminMessage();
-            //OpenRemoteModule();
+            SetWeatherImage();
+            SetComicStripImage(ImageComic);
+            TBlockDate.Text = Date.ToString("dd/MM/yyyy");
+            SetAdminMessage();
+            OpenRemoteModule();
         }
 
         /// <summary>
